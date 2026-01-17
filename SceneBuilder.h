@@ -1,28 +1,31 @@
-//
-// Created by stanislaw on 12.01.2026.
-//
-
+// language: cpp
 #ifndef PROJEKT3D_SCENEBUILDER_H
 #define PROJEKT3D_SCENEBUILDER_H
 
-#pragma once
 #include <osg/Group>
-#include <osg/MatrixTransform>
-#include <osg/Geode>
-#include <osg/ShapeDrawable>
-#include "GameController.h"
-#include "Mole.h"
+#include <osg/ref_ptr>
+#include <vector>
+
+class GameController;
+class Mole;
+
+// prosty handler klawiszy do trafiania mole (1/2/3)
+#include <osgGA/GUIEventHandler>
+class MoleKeyHandler : public osgGA::GUIEventHandler {
+public:
+    MoleKeyHandler(GameController* controller, const std::vector<osg::ref_ptr<Mole>>& moles);
+    virtual bool handle(const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapter& aa) override;
+
+private:
+    GameController* _controller;
+    std::vector<osg::ref_ptr<Mole>> _moles;
+};
 
 class SceneBuilder {
 public:
-    SceneBuilder();
-    ~SceneBuilder();
-
-    osg::ref_ptr<osg::Group> createScene(osg::ref_ptr<GameController> gameController);
-
-private:
-    osg::ref_ptr<osg::MatrixTransform> createTable();
-    osg::ref_ptr<Mole> createMole(const osg::Vec3& position);
+    // tworzy scenę i wypełnia outMoles (3 mole)
+    static osg::ref_ptr<osg::Group> createScene(GameController* controller,
+                                                std::vector<osg::ref_ptr<Mole>>* outMoles = nullptr);
 };
 
-#endif //PROJEKT3D_SCENEBUILDER_H
+#endif // PROJEKT3D_SCENEBUILDER_H
