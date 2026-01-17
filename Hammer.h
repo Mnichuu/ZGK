@@ -11,7 +11,7 @@
 #include <osg/ShapeDrawable>
 #include <osg/Vec3>
 
-class Hammer {
+class Hammer : public osg::Referenced {
 public:
     Hammer(const osg::Vec3& startPos);
     ~Hammer() {}

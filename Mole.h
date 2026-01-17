@@ -1,7 +1,4 @@
-//
-// Created by stanislaw on 12.01.2026.
-//
-
+// File: `Mole.h`
 #ifndef PROJEKT3D_MOLE_H
 #define PROJEKT3D_MOLE_H
 
@@ -25,20 +22,19 @@ public:
     Mole() = default;
     ~Mole() override = default;
 
-    // API potrzebne przez GameController
-    virtual void show() = 0;
-    virtual void hide() = 0;
-    virtual bool isVisible() const = 0;
-    virtual void update(float delta) = 0;
+    // API potrzebne przez GameController - nie są już czysto wirtualne
+    virtual void show();
+    virtual void hide();
+    virtual bool isVisible() const;
+    virtual void update(float delta);
     osg::ref_ptr<osg::MatrixTransform> getNode() const;
 
 private:
     osg::ref_ptr<osg::MatrixTransform> _transform;
-    osg::Vec3 _basePosition;   // pozycja na stole
+    osg::Vec3 _basePosition;
     float _currentHeight;
-    float _speed;              // prędkość wyskoku
+    float _speed;
     State _state;
 };
-
 
 #endif //PROJEKT3D_MOLE_H

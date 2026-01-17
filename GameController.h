@@ -11,7 +11,7 @@
 #include "Mole.h"
 #include "Hammer.h"
 
-class GameController {
+class GameController : public osg::Referenced {
 public:
     GameController();
     ~GameController() {}
