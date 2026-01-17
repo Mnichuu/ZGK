@@ -39,19 +39,32 @@ void GameController::setSelectedHole(int index) {
         osg::Vec4 color = (i == _selectedHole) ? osg::Vec4(1.0f, 0.0f, 0.0f, 1.0f)
                                                : osg::Vec4(0.02f, 0.02f, 0.02f, 1.0f);
         _holes[i].drawable->setColor(color);
+        _hammer.setTarget(_sceneData.holes[_selectedHole].transform->getMatrix().getTrans());
     }
 }
 
 
 void GameController::hitSelectedHole() {
     std::cout << "Hit hole " << _selectedHole << " 🔨\n";
-    // tu później:
-    // - animacja młotka
-    // - sprawdzenie trafienia
+    _hammer.hit();
 }
 
 void GameController::setHoles(const std::vector<SceneBuilder::Hole>& holes) {
     _holes = holes;
+}
+
+void GameController::update(float deltaTime) {
+    _hammer.update(deltaTime);
+}
+
+void GameController::setSceneData(const SceneBuilder::SceneData& data) {
+    _sceneData = data;
+    _tableTransform = data.tableTransform;
+
+    // ustaw młotek nad pierwszą dziurą domyślnie
+    if (!_sceneData.holes.empty()) {
+        _hammer.setTarget(_sceneData.holes[_selectedHole].transform->getMatrix().getTrans());
+    }
 }
 
 

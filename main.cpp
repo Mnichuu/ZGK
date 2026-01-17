@@ -16,9 +16,13 @@ int main(int argc, char** argv)
     // 2. Kontroler gry (logika)
     // =========================
     GameController gameController;
+    gameController.setSceneData(scene);
+
     gameController.setTableTransform(scene.tableTransform.get());
     gameController.setHoles(scene.holes);
 
+    // dodaj młotek do sceny
+    scene.root->addChild(gameController._hammer.getTransform());
 
     // =========================
     // 3. Viewer
@@ -33,8 +37,10 @@ int main(int argc, char** argv)
     // =========================
     viewer.setCameraManipulator(nullptr);
 
-    osg::Vec3 eye(0.0f, -4.0f, 1.2f);
-    osg::Vec3 center(0.0f, 0.0f, 0.06f);
+    // ustawienia kamery
+    const float tableZ = 0.06f;
+    osg::Vec3 eye(0.0f, -40.0f, 20.0f);
+    osg::Vec3 center(0.0f, 0.0f, tableZ);
     osg::Vec3 up(0.0f, 0.0f, 1.0f);
 
     viewer.getCamera()->setViewMatrixAsLookAt(eye, center, up);
@@ -50,5 +56,12 @@ int main(int argc, char** argv)
     // =========================
     // 6. Start pętli renderującej
     // =========================
-    return viewer.run();
+    // pętla renderująca z update
+    while (!viewer.done()) {
+        double t0 = viewer.getFrameStamp()->getReferenceTime();
+        viewer.frame();
+        double t1 = viewer.getFrameStamp()->getReferenceTime();
+        gameController.update(t1 - t0);
+    }
+    return 0;
 }
