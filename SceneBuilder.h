@@ -4,12 +4,25 @@
 #define PROJEKT3D_SCENEBUILDER_H
 
 #include <osg/Group>
-#include <osg/ref_ptr>
+#include <osg/MatrixTransform>
+#include <osg/ShapeDrawable>
+#include <vector>
 
 class SceneBuilder {
 public:
-    // Tworzy scenę z blatem i trzema dziurami
-    static osg::ref_ptr<osg::Group> createScene();
+    struct Hole {
+        osg::ref_ptr<osg::MatrixTransform> transform;
+        osg::ref_ptr<osg::ShapeDrawable> drawable;
+    };
+
+    struct SceneData {
+        osg::ref_ptr<osg::Group> root;
+        osg::ref_ptr<osg::MatrixTransform> tableTransform;
+        std::vector<Hole> holes;
+    };
+
+    // Tworzy scenę z blatem, dziurami i podłogą
+    static SceneData createScene();
 };
 
-#endif // PROJEKT3D_SCENEBUILDER_H
+#endif
