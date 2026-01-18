@@ -1,7 +1,3 @@
-//
-// Created by stanislaw on 17.01.2026.
-//
-
 #ifndef PROJEKT3D_GAMECONTROLLER_H
 #define PROJEKT3D_GAMECONTROLLER_H
 
@@ -23,12 +19,10 @@ public:
 
     // akcje sterowane klawiaturą
     void toggleTableLock();
-    void moveTable(float dx);
-
     void setSelectedHole(int index);
     void hitSelectedHole();
 
-    // NOWE: przekazujemy dziury z SceneBuilder
+    // przekazanie dziur z SceneBuilder
     void setHoles(const std::vector<SceneBuilder::Hole>& holes);
 
     // update młotka, wywoływane w każdej klatce
@@ -43,11 +37,11 @@ private:
     bool _tableLocked;
 
     int _selectedHole;
-    std::vector<SceneBuilder::Hole> _holes; // trzymamy dziury
+    std::vector<SceneBuilder::Hole> _holes;
 
     SceneBuilder::SceneData _sceneData;
     std::vector<std::unique_ptr<Mole>> _moles;
     ScoreSystem _score;
 };
 
-#endif //PROJEKT3D_GAMECONTROLLER_H
+#endif

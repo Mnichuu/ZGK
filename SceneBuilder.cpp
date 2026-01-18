@@ -63,7 +63,7 @@ SceneBuilder::SceneData SceneBuilder::createScene() {
         holeTransform->addChild(holeGeode);
         data.tableTransform->addChild(holeTransform);
 
-        // zapisujemy transform i drawable dla późniejszej zmiany koloru
+        // zapis transform i drawable dla późniejszej zmiany koloru
         Hole h;
         h.transform = holeTransform;
         h.drawable  = holeDrawable;

@@ -4,7 +4,6 @@ SRC := $(wildcard *.cpp)
 OBJ := $(SRC:.cpp=.o)
 TARGET := projekt3D
 
-# użyj pkg-config dla OpenSceneGraph; jeśli nie masz OSG, usuń te linie
 PKG_CFLAGS := $(shell pkg-config --cflags openscenegraph 2>/dev/null)
 PKG_LIBS := $(shell pkg-config --libs openscenegraph 2>/dev/null)
 

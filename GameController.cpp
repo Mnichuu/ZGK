@@ -1,14 +1,8 @@
-//
-// Created by stanislaw on 17.01.2026.
-//
-
 #include "Mole.h"
 #include "GameController.h"
 #include <iostream>
 #include <memory>
 #include <osg/Matrix>
-
-
 
 GameController::GameController()
     : _tableLocked(true),
@@ -22,14 +16,6 @@ void GameController::setTableTransform(osg::MatrixTransform* table) {
 void GameController::toggleTableLock() {
     _tableLocked = !_tableLocked;
     std::cout << (_tableLocked ? "Table locked\n" : "Table unlocked\n");
-}
-
-void GameController::moveTable(float dx) {
-    if (_tableLocked || !_tableTransform) return;
-
-    osg::Matrix m = _tableTransform->getMatrix();
-    m *= osg::Matrix::translate(dx, 0.0f, 0.0f);
-    _tableTransform->setMatrix(m);
 }
 
 void GameController::setSelectedHole(int index) {
@@ -85,7 +71,7 @@ void GameController::setSceneData(const SceneBuilder::SceneData& data) {
     _sceneData = data;
     _tableTransform = data.tableTransform;
 
-    // ustaw młotek nad pierwszą dziurą domyślnie
+    // młotek nad pierwszą dziurą domyślnie
     if (!_sceneData.holes.empty()) {
         _hammer.setTarget(_sceneData.holes[_selectedHole].transform->getMatrix().getTrans());
     }

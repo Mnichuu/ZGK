@@ -1,5 +1,3 @@
-// language: cpp
-// File: `SceneBuilder.h`
 #ifndef PROJEKT3D_SCENEBUILDER_H
 #define PROJEKT3D_SCENEBUILDER_H
 
@@ -21,7 +19,6 @@ public:
         std::vector<Hole> holes;
     };
 
-    // Tworzy scenę z blatem, dziurami i podłogą
     static SceneData createScene();
 };
 

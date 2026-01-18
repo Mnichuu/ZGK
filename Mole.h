@@ -1,7 +1,3 @@
-//
-// Created by stanislaw on 18.01.2026.
-//
-
 #ifndef PROJEKT3D_MOLE_H
 #define PROJEKT3D_MOLE_H
 

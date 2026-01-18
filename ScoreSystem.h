@@ -1,7 +1,3 @@
-//
-// Created by stanislaw on 18.01.2026.
-//
-
 #ifndef PROJEKT3D_SCORESYSTEM_H
 #define PROJEKT3D_SCORESYSTEM_H
 
@@ -26,4 +22,4 @@ private:
     int _attempts;
 };
 
-#endif //PROJEKT3D_SCORESYSTEM_H
+#endif

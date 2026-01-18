@@ -1,7 +1,3 @@
-//
-// Created by stanislaw on 17.01.2026.
-//
-
 #ifndef PROJEKT3D_INPUTHANDLER_H
 #define PROJEKT3D_INPUTHANDLER_H
 

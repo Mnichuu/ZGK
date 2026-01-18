@@ -59,6 +59,7 @@ Hammer::Hammer()
         ->setAttributeAndModes(metalMat, osg::StateAttribute::ON);
 
     _transform->addChild(headGeode);
+
 }
 
 void Hammer::setTarget(const osg::Vec3& target) {

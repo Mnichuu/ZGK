@@ -13,13 +13,10 @@ public:
 
     osg::MatrixTransform* getTransform() { return _transform.get(); }
 
-    // ustaw cel (pozycję) młotka
     void setTarget(const osg::Vec3& target);
 
-    // uderzenie młotkiem
     void hit();
 
-    // aktualizacja pozycji w każdej klatce
     void update(float deltaTime);
 
 private:
