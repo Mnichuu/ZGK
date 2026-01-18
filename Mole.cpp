@@ -5,8 +5,8 @@
 #include <cstdlib>
 
 Mole::Mole(const osg::Vec3& holePos, int holeIndex)
-    : _basePos(holePos),
-      _holeIndex(holeIndex),
+    : _holeIndex(holeIndex),
+      _basePos(holePos),
       _state(HIDDEN),
       _timer(0.0f)
 {

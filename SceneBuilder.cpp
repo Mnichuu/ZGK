@@ -41,6 +41,7 @@ SceneBuilder::SceneData SceneBuilder::createScene() {
     // =========================
     const float holeRadius = 5.0f;
     const float holeHeight = 0.02f;
+    //const float holeDepth = 2.0f;
     const float holeZ = tableZ + tableThickness*0.5f + 0.001f;
     const float xOffsets[3] = {-10.0f,0.0f,10.0f};
 
