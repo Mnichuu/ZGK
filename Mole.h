@@ -8,17 +8,25 @@
 #include <osg/MatrixTransform>
 #include <osg/ref_ptr>
 
+#include "GameController.h"
+
 class Mole {
 public:
-    explicit Mole(const osg::Vec3& holePos);
+    explicit Mole(const osg::Vec3& holePos, int holeIndex);
 
     osg::MatrixTransform* getNode() { return _root.get(); }
 
     void update(double dt);
 
+    bool isVisible();
+
+    int getHoleIndex();
+
+    void hide();
+
 private:
     osg::ref_ptr<osg::MatrixTransform> _root;
-
+    int _holeIndex;
     osg::Vec3 _basePos;
 
     enum State {

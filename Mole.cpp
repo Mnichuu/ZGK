@@ -4,8 +4,9 @@
 #include <osg/ShapeDrawable>
 #include <cstdlib>
 
-Mole::Mole(const osg::Vec3& holePos)
+Mole::Mole(const osg::Vec3& holePos, int holeIndex)
     : _basePos(holePos),
+      _holeIndex(holeIndex),
       _state(HIDDEN),
       _timer(0.0f)
 {
@@ -73,4 +74,16 @@ void Mole::update(double dt) {
             break;
         }
     }
+}
+
+bool Mole::isVisible() {
+    return _state == VISIBLE;
+}
+
+int Mole::getHoleIndex() {
+    return _holeIndex;
+}
+
+void Mole::hide() {
+    _state = FALLING;
 }

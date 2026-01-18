@@ -2,12 +2,13 @@
 // Created by stanislaw on 17.01.2026.
 //
 
+#include "Mole.h"
 #include "GameController.h"
 #include <iostream>
 #include <memory>
 #include <osg/Matrix>
 
-#include "Mole.h"
+
 
 GameController::GameController()
     : _tableLocked(true),
@@ -50,6 +51,23 @@ void GameController::setSelectedHole(int index) {
 void GameController::hitSelectedHole() {
     std::cout << "Hit hole " << _selectedHole << " 🔨\n";
     _hammer.hit();
+    bool hit = false;
+
+    // sprawdzamy czy któryś kret jest aktywny w wybranej dziurze
+    for (auto& mole : _moles) {
+        if (mole->isVisible() &&
+            mole->getHoleIndex() == _selectedHole) {
+
+            mole->hide();
+            _score.registerHit();
+            hit = true;
+            break;
+            }
+    }
+
+    if (!hit) {
+        _score.registerMiss();
+    }
 }
 
 void GameController::setHoles(const std::vector<SceneBuilder::Hole>& holes) {
@@ -74,15 +92,14 @@ void GameController::setSceneData(const SceneBuilder::SceneData& data) {
 }
 
 void GameController::setMoles(const SceneBuilder::SceneData& data, osg::Group* root) {
-    _moles.clear();
 
     for (int i = 0; i < 3; ++i) {
         osg::Vec3 holePos =
             data.holes[i].transform->getMatrix().getTrans();
 
-        auto mole = std::make_unique<Mole>(holePos);
-        root->addChild(mole->getNode());
+        auto mole = std::make_unique<Mole>(holePos, i);
 
+        root->addChild(mole->getNode());
         _moles.push_back(std::move(mole));
     }
 }

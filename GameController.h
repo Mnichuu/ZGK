@@ -11,6 +11,8 @@
 #include "Hammer.h"
 #include "Mole.h"
 #include "SceneBuilder.h"
+#include "ScoreSystem.h"
+class Mole;
 
 class GameController {
 public:
@@ -45,6 +47,7 @@ private:
 
     SceneBuilder::SceneData _sceneData;
     std::vector<std::unique_ptr<Mole>> _moles;
+    ScoreSystem _score;
 };
 
 #endif //PROJEKT3D_GAMECONTROLLER_H
