@@ -20,6 +20,7 @@ int main(int argc, char** argv)
 
     gameController.setTableTransform(scene.tableTransform.get());
     gameController.setHoles(scene.holes);
+    gameController.setMoles(scene, scene.root.get());
 
     // dodaj młotek do sceny
     scene.root->addChild(gameController._hammer.getTransform());

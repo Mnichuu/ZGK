@@ -4,7 +4,10 @@
 
 #include "GameController.h"
 #include <iostream>
+#include <memory>
 #include <osg/Matrix>
+
+#include "Mole.h"
 
 GameController::GameController()
     : _tableLocked(true),
@@ -55,6 +58,9 @@ void GameController::setHoles(const std::vector<SceneBuilder::Hole>& holes) {
 
 void GameController::update(float deltaTime) {
     _hammer.update(deltaTime);
+    for (auto& m : _moles) {
+        m->update(deltaTime);
+    }
 }
 
 void GameController::setSceneData(const SceneBuilder::SceneData& data) {
@@ -64,6 +70,20 @@ void GameController::setSceneData(const SceneBuilder::SceneData& data) {
     // ustaw młotek nad pierwszą dziurą domyślnie
     if (!_sceneData.holes.empty()) {
         _hammer.setTarget(_sceneData.holes[_selectedHole].transform->getMatrix().getTrans());
+    }
+}
+
+void GameController::setMoles(const SceneBuilder::SceneData& data, osg::Group* root) {
+    _moles.clear();
+
+    for (int i = 0; i < 3; ++i) {
+        osg::Vec3 holePos =
+            data.holes[i].transform->getMatrix().getTrans();
+
+        auto mole = std::make_unique<Mole>(holePos);
+        root->addChild(mole->getNode());
+
+        _moles.push_back(std::move(mole));
     }
 }
 
